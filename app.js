@@ -24,7 +24,7 @@ dotenv.config({
 app.use(express.json())
 app.use(cors(corsOptions));
 
-const mongoURI = "mongodb+srv://ikrammalaysia19:Password.19@mycluster.olsb1vj.mongodb.net/"
+const mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@mycluster.olsb1vj.mongodb.net/`
 const port = process.env.PORT || 5000
 const envMode = process.env.NODE_ENV.trim() || "PRODUCTION"
 
