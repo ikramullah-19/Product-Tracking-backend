@@ -1,5 +1,6 @@
 import { Product } from '../models/products.js'
 import { getMonthNumber } from '../utils/features.js'
+import { ErrorHandler } from '../utils/utility.js'
 // import { Notification } from '../models/notification.js'
 
 
@@ -36,12 +37,24 @@ const getProducts = async (req, res, next) => {
 
 
 const searchProducts = async (req, res, next) => {
+
+    const { day, month, year } = req.body;
+
+    if(!month){
+        return res.status(400).json({
+            success: false,
+            message:  "Please Enter Month"
+        })
+    }
+    if(!year){
+        return res.status(400).json({
+            success: false,
+            message:  "Please Enter Year"
+        })
+    }
+
     try {
         // Build the query object
-        const { day, month, year } = req.body;
-        console.log("day", day)
-        console.log("month", month)
-        console.log("year", year)
         const query = {};
     
         if (year || month || day) {
@@ -65,7 +78,6 @@ const searchProducts = async (req, res, next) => {
     
         // Execute the query
         const products = await Product.find(query).exec();
-        console.log(products)
         res.status(200).json({
             success: true,
             message: `Products according to search query`,
