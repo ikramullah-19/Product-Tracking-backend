@@ -8,7 +8,7 @@ import productRoute from './routes/products.js'
 const corsOptions = {
   origin: ['http://localhost:3000',
       // 'http://localhost:4173',
-      // process.env.CLIENT_URL
+      process.env.CLIENT_URL
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true
